@@ -1,0 +1,52 @@
+.account-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.account-box {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 8px;
+  width: 80vw;
+}
+
+.account-actions {
+  background-color: aliceblue;
+  padding: 10px;
+  width: 20%;
+}
+
+.account-actions > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.account-actions > ul > li {
+  list-style: none;
+}
+
+.account-actions > ul > li > button {
+  padding: 10px;
+  background-color: rgb(240, 240, 240);
+  width: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: Quicksand, sans-serif;
+  font-weight: bold;
+}
+
+.account-actions > ul > li > button:hover {
+  background-color: rgb(220, 220, 220);
+}
+
+.account-content {
+  height: 100%;
+  width: 80%;
+  background-color: rgb(170, 170, 170);
+}
