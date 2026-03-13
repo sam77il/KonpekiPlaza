@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/global.css" />
-    <link rel="stylesheet" href="./styles/auth.css" />
-    <title>Konpeki Plaza - Login</title>
+    <link rel="stylesheet" href="./styles/inventory.css" />
+    <title>Konpeki Plaza - Viktor</title>
   </head>
   <body>
     <header>
@@ -28,23 +28,16 @@
       </div>
     </header>
 
-    <div class="auth-container">
-      <h2>Login</h2>
-      <form class="auth-form" id="login-form">
-        <div class="auth-row">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
+    <main class="inventory-wrapper">
+      <div class="inventory-content">
+        <div class="inventory-header">
+          <h2><span id="username"></span>'s inventory</h2>
         </div>
-        <div class="auth-row">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required />
-        </div>
-        <button type="submit">Login</button>
-        <p class="error-message" id="error-message"></p>
-      </form>
-    </div>
+        <div class="inventory-item-list"></div>
+      </div>
+    </main>
 
     <script src="./scripts/global.js"></script>
-    <script src="./scripts/login.js"></script>
+    <script src="./scripts/inventory.js"></script>
   </body>
 </html>

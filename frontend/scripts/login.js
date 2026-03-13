@@ -18,12 +18,6 @@ loginForm.addEventListener("submit", async (e) => {
     const data = await res.json();
 
     if (data.success) {
-      // window.location.href = "/account.html";
-      user.email = data.user.email;
-      user.username = data.user.username;
-      user.id = data.user.id;
-      user.loggedIn = true;
-      console.log("Login successful:", data.user);
       window.location.href = "/account.html";
     } else {
       errorMessage.textContent = data.message || "Error logging in";

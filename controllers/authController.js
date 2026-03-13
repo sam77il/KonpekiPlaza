@@ -54,6 +54,7 @@ router.post("/api/auth/login", (req, res) => {
         id: user.id,
         username: user.username,
         email: user.email,
+        eurodollar: user.eurodollar,
       };
       req.session.user = finalUser;
       res.json({ success: true, message: "Login successful", user: finalUser });
@@ -100,6 +101,138 @@ router.get("/api/auth/logout", (req, res) => {
     }
     res.json({ success: true, message: "Logout successful" });
   });
+});
+
+router.post("/api/update-username", async (req, res) => {
+  if (!req.session.user) {
+    res.status(401).json({ success: false, message: "Unauthorized" });
+    return;
+  }
+
+  const { username } = req.body;
+  const nameExists = await checkIfUserExists(username, null);
+  if (nameExists) {
+    res
+      .status(400)
+      .json({ success: false, message: "Username already exists" });
+    return;
+  }
+
+  db.query(
+    "UPDATE users SET username = ? WHERE id = ?",
+    [username, req.session.user.id],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating username:", err);
+        res
+          .status(500)
+          .json({ success: false, message: "Error updating username" });
+        return;
+      }
+      req.session.user.username = username;
+      res.json({ success: true, message: "Username updated successfully" });
+    },
+  );
+});
+
+router.post("/api/update-email", async (req, res) => {
+  if (!req.session.user) {
+    res.status(401).json({ success: false, message: "Unauthorized" });
+    return;
+  }
+
+  const { email } = req.body;
+  const emailExists = await checkIfUserExists(null, email);
+  if (emailExists) {
+    res.status(400).json({ success: false, message: "Email already exists" });
+    return;
+  }
+
+  db.query(
+    "UPDATE users SET email = ? WHERE id = ?",
+    [email, req.session.user.id],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating email:", err);
+        res
+          .status(500)
+          .json({ success: false, message: "Error updating email" });
+        return;
+      }
+      req.session.user.email = email;
+      res.json({ success: true, message: "Email updated successfully" });
+    },
+  );
+});
+
+router.post("/api/update-password", async (req, res) => {
+  if (!req.session.user) {
+    res.status(401).json({ success: false, message: "Unauthorized" });
+    return;
+  }
+
+  const { oldPassword, newPassword } = req.body;
+
+  if (newPassword.length < 6) {
+    res.status(400).json({
+      success: false,
+      message: "New password must be at least 6 characters long",
+    });
+    return;
+  }
+
+  db.query(
+    "SELECT password FROM users WHERE id = ?",
+    [req.session.user.id],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating password:", err);
+        res
+          .status(500)
+          .json({ success: false, message: "Error updating password" });
+        return;
+      }
+      if (result.length === 0) {
+        res.status(400).json({ success: false, message: "User not found" });
+        return;
+      }
+
+      const hashedPassword = result[0].password;
+      bcrypt.compare(oldPassword, hashedPassword, async (err, isMatch) => {
+        if (err) {
+          console.error("Error comparing passwords:", err);
+          res
+            .status(500)
+            .json({ success: false, message: "Error updating password" });
+          return;
+        }
+        if (!isMatch) {
+          res
+            .status(400)
+            .json({ success: false, message: "Current password is incorrect" });
+          return;
+        }
+        const newHashedPassword = await bcrypt.hash(newPassword, 10);
+        db.query(
+          "UPDATE users SET password = ? WHERE id = ?",
+          [newHashedPassword, req.session.user.id],
+          (err, result) => {
+            if (err) {
+              console.error("Error updating password:", err);
+              res
+                .status(500)
+                .json({ success: false, message: "Error updating password" });
+              return;
+            }
+            res.json({
+              success: true,
+              message: "Password updated successfully",
+            });
+          },
+        );
+      });
+    },
+  );
 });
 
 router.get("/api/auth/ping", (req, res) => {

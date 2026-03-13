@@ -2,6 +2,8 @@ import express from "express";
 import session from "express-session";
 import cors from "cors";
 import authController from "./controllers/authController.js";
+import agentController from "./controllers/agentController.js";
+import inventoryController from "./controllers/inventoryController.js";
 import db from "./utils/db.js";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -44,6 +46,8 @@ db.connect((err) => {
 });
 
 app.use(authController);
+app.use(agentController);
+app.use(inventoryController);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

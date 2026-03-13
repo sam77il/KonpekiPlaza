@@ -20,20 +20,108 @@
         </ul>
       </div>
 
-      <div class="header-right" id="account"></div>
+      <div class="header-right">
+        <div class="eurodollar">
+          <span id="eurodollar-amount">0</span> <span class="currency">€$</span>
+        </div>
+        <div id="account"></div>
+      </div>
     </header>
 
-    <div class="account-container">
-      <div class="account-box">
-        <div class="account-actions">
+    <div class="account-container-wrapper">
+      <div class="account-content">
+        <aside class="account-container">
+          <h2>Account Management</h2>
           <ul>
-            <li><button id="security-button">Security</button></li>
-            <li><button id="logout-button">Logout</button></li>
+            <li><a href="./account.html#id">Konpeki ID</a></li>
+            <li>
+              <a href="./account.html#security">Security</a>
+            </li>
+            <li>
+              <a href="./account.html#logout">Logout</a>
+            </li>
           </ul>
+        </aside>
+        <div>
+          <section id="id">
+            <div class="section-header">
+              <h3>Konpeki ID</h3>
+              <p>
+                Your Konpeki ID is used by players to find you through the
+                marketplace and other social features.
+              </p>
+            </div>
+            <div class="section-content">
+              <p>Konpeki ID: <span id="konpeki-id"></span></p>
+
+              <input
+                type="text"
+                id="konpeki-username"
+                name="username"
+                value="loading..."
+              />
+              <button id="save-username">Save Changes</button>
+            </div>
+          </section>
+
+          <section id="security">
+            <div class="section-header">
+              <h3>Security</h3>
+              <p>
+                Manage your account's security settings and update your
+                password.
+              </p>
+            </div>
+            <div class="section-content">
+              <p>Email:</p>
+
+              <input
+                type="text"
+                id="konpeki-email"
+                name="email"
+                value="loading..."
+              />
+              <button id="save-email">Save Email</button>
+
+              <p>Password:</p>
+              <input
+                type="text"
+                id="konpeki-currentpassword"
+                name="currentpassword"
+                placeholder="Current Password"
+              />
+              <input
+                type="text"
+                id="konpeki-newpassword"
+                name="newpassword"
+                placeholder="New Password"
+              />
+              <input
+                type="text"
+                id="konpeki-newpasswordconfirm"
+                name="newpasswordconfirm"
+                placeholder="Confirm New Password"
+              />
+              <button id="save-password">Save Password</button>
+            </div>
+          </section>
+
+          <section id="logout">
+            <div class="section-header">
+              <h3>Logout</h3>
+              <p>
+                Log out of your account on this device. You will need to log in
+                again to access your account.
+              </p>
+            </div>
+            <div class="section-content">
+              <button id="logout-button">Logout</button>
+            </div>
+          </section>
         </div>
-        <div class="account-content"></div>
       </div>
     </div>
+
     <script src="./scripts/global.js"></script>
     <script src="./scripts/account.js"></script>
   </body>
