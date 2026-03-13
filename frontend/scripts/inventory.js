@@ -10,7 +10,7 @@ async function loadInventoryPage() {
     const data = await res.json();
 
     if (data.success && data.message === "NIF") {
-      console.log("No items found");
+      Notify("System", "No Items found", "red", 3500);
       return;
     }
 

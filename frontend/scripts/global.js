@@ -80,15 +80,30 @@ document.addEventListener("DOMContentLoaded", () => {
   pingApi();
 });
 
-const toggleMuteBtn = document.querySelector(".hero-mute-button");
-const bgVideo = document.getElementById("hero-video");
-const herovolumeinput = document.querySelector(".hero-volume-input");
+function Notify(title, message, color, duraton) {
+  let notifyList = document.querySelector(".notify-list");
 
-toggleMuteBtn.addEventListener("click", () => {
-  bgVideo.muted = bgVideo.muted ? false : true;
-});
+  if (!notifyList) {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `
+      <div class="notify-list"></div>  
+    `,
+    );
+    notifyList = document.querySelector(".notify-list");
+  }
 
-herovolumeinput.addEventListener("input", (e) => {
-  console.log("sda", e.target.value * 0.01);
-  bgVideo.volume = e.target.value * 0.01;
-});
+  const notify = document.createElement("div");
+  notify.classList.add("notify");
+  notify.style.borderRight = "solid 4px " + color;
+  notify.innerHTML = `
+    <p>${title}</p>
+    <p>${message}</p>
+  `;
+
+  notifyList.prepend(notify);
+
+  setTimeout(() => {
+    notify.remove();
+  }, duraton);
+}

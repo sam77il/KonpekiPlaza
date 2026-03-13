@@ -24,6 +24,10 @@
   gap: 1.5rem;
 }
 
+.auth-form a {
+  color: #fcee0a;
+}
+
 .auth-row {
   display: flex;
   flex-direction: column;
@@ -47,7 +51,7 @@
   color: white;
 }
 
-.auth-form > button {
+.auth-form button {
   background-color: #fcee0a;
   padding: 10px 15px;
   color: black;
@@ -67,4 +71,9 @@
   object-fit: cover;
   z-index: -1;
   filter: blur(10px);
+}
+
+.auth-bottom {
+  display: flex;
+  flex-direction: column;
 }

@@ -65,8 +65,11 @@ async function loadAgentPage(agent) {
     const allItemButtons = document.querySelectorAll(".agent-item");
     allItemButtons.forEach((btn, _) => {
       btn.addEventListener("click", () => {
-        console.log("clicked");
-        toggleModalBox(true, agent, btn.dataset.itemid);
+        if (window.user.loggedIn) {
+          toggleModalBox(true, agent, btn.dataset.itemid);
+        } else {
+          Notify("System", "Not logged in", "red", 3500);
+        }
       });
     });
   } catch (error) {
@@ -143,7 +146,6 @@ async function toggleModalBox(state, agent, itemId) {
     const modelItemTotalPrice = document.querySelector("#item-total-price");
 
     modalCloseButton.addEventListener("click", () => {
-      console.log("closing");
       toggleModalBox(false, null, null);
     });
 
@@ -180,7 +182,10 @@ async function buyItem(id, amount) {
       return;
     }
 
-    window.location.reload();
+    Notify("System", "Successfully bought item", "green", 3500);
+    setTimeout(() => {
+      window.location.reload();
+    }, 3500);
   } catch (error) {
     console.error("Error clicking item:", error);
   }

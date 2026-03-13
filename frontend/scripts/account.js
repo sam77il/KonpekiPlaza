@@ -32,7 +32,12 @@ function loadAccountPage() {
     const newPassword = konpekiNewPasswortInput.value;
     const newPasswordConfirm = konpekiNewPasswordConfirmInput.value;
     if (newPassword !== newPasswordConfirm) {
-      alert("New password and confirmation do not match");
+      Notify(
+        "System",
+        "New password and confirmation do not match",
+        "red",
+        3500,
+      );
       return;
     }
 
@@ -50,12 +55,17 @@ function loadAccountPage() {
       });
       const data = await res.json();
       if (data.success) {
-        alert("Password updated successfully");
+        Notify("System", "Password updated successfully", "green", 3500);
         konpekiCurrentPasswordInput.value = "";
         konpekiNewPasswortInput.value = "";
         konpekiNewPasswordConfirmInput.value = "";
       } else {
-        alert(data.message || "Error updating password");
+        Notify(
+          "System",
+          data.message || "Error updating password",
+          "red",
+          3500,
+        );
       }
     } catch (error) {
       console.error("Error updating password:", error);
@@ -66,7 +76,7 @@ function loadAccountPage() {
     const newEmail = konpekiEmailInput.value.trim();
 
     if (newEmail === "") {
-      alert("Email cannot be empty");
+      Notify("System", "Email cannot be empty", "red", 3500);
       return;
     }
 
@@ -81,9 +91,11 @@ function loadAccountPage() {
       });
       const data = await res.json();
       if (data.success) {
-        alert("Email updated successfully");
+        Notify("System", "Email updated successfully", "green", 3500);
         window.user.email = newEmail;
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 3500);
       }
     } catch (error) {
       console.error("Error updating email:", error);
@@ -94,7 +106,7 @@ function loadAccountPage() {
     const newUsername = konpekiUsernameInput.value.trim();
 
     if (newUsername === "") {
-      alert("Username cannot be empty");
+      Notify("System", "Username cannot be empty", "red", 3500);
       return;
     }
 
@@ -109,9 +121,12 @@ function loadAccountPage() {
       });
       const data = await res.json();
       if (data.success) {
-        alert("Username updated successfully");
+        Notify("System", "Username updated successfully", "green", 3500);
+
         window.user.username = newUsername;
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 3500);
       }
     } catch (error) {
       console.error("Error updating username:", error);
