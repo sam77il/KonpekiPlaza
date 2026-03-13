@@ -1,6 +1,42 @@
 const agentItemList = document.querySelector(".agent-item-list");
 
 async function loadAgentPage(agent) {
+  if (agent === "viktor") {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `
+      <img id="agent-bg" src="../images/viktor_bg.jpg" alt="viktor image" /> 
+    `,
+    );
+  } else if (agent === "fingers") {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `
+      <img id="agent-bg" src="../images/fingers_bg.webp" alt="fingers image" /> 
+    `,
+    );
+  } else if (agent === "nusa") {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `
+      <img id="agent-bg" src="../images/nusa_bg.webp" alt="fingers image" /> 
+    `,
+    );
+  }
+
+  const agentBackground = document.getElementById("agent-bg");
+
+  agentBackground.style.position = "fixed";
+  agentBackground.style.top = "0";
+  agentBackground.style.left = "0";
+  agentBackground.style.width = "100vw";
+  agentBackground.style.height = "100vh";
+  agentBackground.style.objectFit = "cover";
+  agentBackground.style.zIndex = "-1";
+
+  agentBackground.style.filter = "blur(10px)";
+  // agentBackground.style.transform = "scale(1.1)"; // verhindert weiße Ränder durch blur
+
   try {
     const res = await fetch(`http://localhost:3000/api/agents/${agent}`, {
       method: "GET",
@@ -82,7 +118,7 @@ async function toggleModalBox(state, agent, itemId) {
 
             <p>Amount: <span id="item-amount-text">0</span></p>
             <p>Total Price: <span id="item-total-price">0</span>€$</p>
-            <input id="item-amount" type="range" max="${data.item.amount}" min="1" />
+            <input id="item-amount" type="number" max="${data.item.amount}" min="1" />
           </div>
           <div id="modal-img" class="modal-img">
             <img

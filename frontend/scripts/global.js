@@ -79,3 +79,16 @@ async function pingApi() {
 document.addEventListener("DOMContentLoaded", () => {
   pingApi();
 });
+
+const toggleMuteBtn = document.querySelector(".hero-mute-button");
+const bgVideo = document.getElementById("hero-video");
+const herovolumeinput = document.querySelector(".hero-volume-input");
+
+toggleMuteBtn.addEventListener("click", () => {
+  bgVideo.muted = bgVideo.muted ? false : true;
+});
+
+herovolumeinput.addEventListener("input", (e) => {
+  console.log("sda", e.target.value * 0.01);
+  bgVideo.volume = e.target.value * 0.01;
+});
