@@ -1,9 +1,10 @@
-const pingUrl = "http://localhost:3000/api/auth/ping";
-const registerUrl = "http://localhost:3000/api/auth/register";
-const loginUrl = "http://localhost:3000/api/auth/login";
+const pingUrl = "http://localhost:5030/api/auth/ping";
+const registerUrl = "http://localhost:5030/api/auth/register";
+const loginUrl = "http://localhost:5030/api/auth/login";
 
 const accountElement = document.getElementById("account");
 
+// Global user state
 window.user = {
   id: null,
   email: null,
@@ -12,6 +13,7 @@ window.user = {
   loggedIn: false,
 };
 
+// global ping to check if user is logged in and get user data
 async function pingApi() {
   let loginTemplate = `
   <div>
@@ -57,10 +59,11 @@ async function pingApi() {
     window.location.href = "/login.html";
   }
 
-  if (window.location.pathname === "/marketplace.html" && !data.loggedIn) {
-    window.location.href = "/login.html";
-  }
+  // if (window.location.pathname === "/marketplace.html" && !data.loggedIn) {
+  //   window.location.href = "/login.html";
+  // }
 
+  // Load page specific data
   if (window.location.pathname === "/account.html" && data.loggedIn) {
     loadAccountPage();
   } else if (window.location.pathname === "/viktor.html") {
@@ -76,10 +79,17 @@ async function pingApi() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   pingApi();
+  // const res = await fetch("http://localhost:5030/users/123", {
+  //   method: "GET",
+  // });
+
+  // const a = await res.json();
+  // console.log(a);
 });
 
+// Global notification function
 function Notify(title, message, color, duraton) {
   let notifyList = document.querySelector(".notify-list");
 

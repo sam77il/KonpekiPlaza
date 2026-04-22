@@ -38,7 +38,7 @@ async function loadAgentPage(agent) {
   // agentBackground.style.transform = "scale(1.1)"; // verhindert weiße Ränder durch blur
 
   try {
-    const res = await fetch(`http://localhost:3000/api/agents/${agent}`, {
+    const res = await fetch(`http://localhost:5030/api/agents/${agent}`, {
       method: "GET",
       credentials: "include",
     });
@@ -89,7 +89,7 @@ async function toggleModalBox(state, agent, itemId) {
 
   try {
     const res = await fetch(
-      `http://localhost:3000/api/agents/${agent}/items/${itemId}`,
+      `http://localhost:5030/api/agents/${agent}/items/${itemId}`,
       {
         method: "GET",
         credentials: "include",
@@ -169,7 +169,7 @@ async function toggleModalBox(state, agent, itemId) {
 async function buyItem(id, amount) {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/agents/buy/${id}/${amount}`,
+      `http://localhost:5030/api/agents/buy/${id}/${amount}`,
       {
         method: "POST",
         credentials: "include",

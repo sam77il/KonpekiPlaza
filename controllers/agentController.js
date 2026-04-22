@@ -3,6 +3,7 @@ import db from "../utils/db.js";
 
 const router = express.Router();
 
+// Get agent items
 router.get("/api/agents/:agent", (req, res) => {
   const { agent } = req.params;
 
@@ -35,6 +36,7 @@ router.get("/api/agents/:agent", (req, res) => {
   }
 });
 
+// Get specific agent item
 router.post("/api/agents/buy/:agentId/:amount", async (req, res) => {
   const { amount, agentId } = req.params;
 
@@ -42,10 +44,7 @@ router.post("/api/agents/buy/:agentId/:amount", async (req, res) => {
     res.status(401).json({ success: false, message: "Not logged in" });
     return;
   }
-  let user = null;
   try {
-    user = await getUserFromId(req.session.user.id);
-
     db.query(
       "SELECT * FROM agents WHERE id = ?",
       [agentId],
@@ -104,7 +103,8 @@ router.post("/api/agents/buy/:agentId/:amount", async (req, res) => {
   }
 });
 
-function tryToAddItemToUser(session, itemId, amount, price) {
+// Helper functions
+export function tryToAddItemToUser(session, itemId, amount, price) {
   return new Promise(async (resolve, reject) => {
     const hasEnoughEuroDollar = await doesUserHasEnoughEuroDollar(
       session,
@@ -216,13 +216,14 @@ function doesUserHasEnoughEuroDollar(session, needMoney) {
   });
 }
 
+// get agent item data
 router.get("/api/agents/:agent/items/:itemId", async (req, res) => {
   const { agent, itemId } = req.params;
 
-  // if (!req.session.user) {
-  //   res.status(401).json({ success: false, message: "Not logged in" });
-  //   return;
-  // }
+  if (!req.session.user) {
+    res.status(401).json({ success: false, message: "Not logged in" });
+    return;
+  }
 
   try {
     db.query(
@@ -247,17 +248,5 @@ router.get("/api/agents/:agent/items/:itemId", async (req, res) => {
     res.status(500).json({ success: false, message: "DB error" });
   }
 });
-
-function getUserFromId(id) {
-  return new Promise((resolve, reject) => {
-    db.query("SELECT * FROM users WHERE id = ?", [id], (err, result) => {
-      if (err) {
-        reject(err);
-      }
-
-      resolve(result[0]);
-    });
-  });
-}
 
 export default router;

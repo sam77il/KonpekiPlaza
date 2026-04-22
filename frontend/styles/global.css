@@ -1,3 +1,7 @@
+:root {
+  --accent: #fcee0a;
+}
+
 @font-face {
   font-family: Quicksand;
   src: url(../fonts/Quicksand-VariableFont_wght.ttf);
@@ -123,6 +127,8 @@ header {
   padding: 10px 15px;
   color: black;
   font-weight: bold;
+  border: none;
+  cursor: pointer;
 }
 
 .eurodollar .currency {
@@ -145,6 +151,11 @@ header {
   width: 100vw;
   height: 100vh;
   position: relative;
+  text-align: center;
+}
+
+.hero-content > div {
+  margin-top: 30vh;
 }
 
 .hero-video-actions {
@@ -157,7 +168,7 @@ header {
 }
 
 .hero-mute-button {
-  background-color: #fcee0a;
+  background-color: var(--accent);
   padding: 25px 50px;
   color: black;
   font-weight: bold;
@@ -205,4 +216,251 @@ header {
   font-size: 1.5rem;
   color: white;
   font-weight: bolder;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: white;
+}
+
+.section {
+  padding: 7rem 1.5rem;
+}
+
+.dark {
+  background: #09090b;
+}
+
+.black {
+  background: #000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.container.small {
+  max-width: 800px;
+}
+
+.grid-2 {
+  display: grid;
+  gap: 5rem;
+}
+
+.grid-3 {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.text {
+  color: #a1a1aa;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.small-text {
+  font-size: 0.9rem;
+  color: #a1a1aa;
+}
+
+.tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.center {
+  text-align: center;
+}
+
+.mb {
+  margin-bottom: 4rem;
+}
+
+.image-wrapper img {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid #27272a;
+  transition: 0.5s;
+}
+
+.image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+.card {
+  background: #18181b;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #27272a;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent);
+}
+
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.price {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.footer {
+  background: #09090b;
+  border-top: 1px solid #18181b;
+  padding: 4rem 1.5rem;
+}
+
+.footer-title {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.footer-heading {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list li {
+  margin-bottom: 0.5rem;
+}
+
+.copyright {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #52525b;
+  margin-top: 3rem;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.primary {
+  background: var(--accent);
+  color: black;
+  border: none;
+}
+
+.primary:hover {
+  transform: scale(1.1);
+}
+
+.outline {
+  border: 1px solid #3f3f46;
+  background: transparent;
+  color: white;
+}
+
+.outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.05);
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(112, 26, 117, 0.4),
+    black,
+    rgba(8, 145, 178, 0.4)
+  );
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+@media (min-width: 768px) {
+  .hero h1 {
+    font-size: 4.5rem;
+  }
+}
+
+.gradient-text {
+  display: block;
+  color: var(--accent);
+  background: none;
+  -webkit-text-fill-color: unset;
+}
+
+.hero-text {
+  color: #d4d4d8;
+  margin: 1.5rem auto;
+}
+
+.badge {
+  display: inline-block;
+  border: 1px solid rgba(252, 238, 10, 0.4);
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: var(--accent);
 }

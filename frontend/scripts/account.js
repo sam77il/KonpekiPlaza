@@ -42,7 +42,7 @@ function loadAccountPage() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/update-password", {
+      const res = await fetch("http://localhost:5030/api/update-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -81,7 +81,7 @@ function loadAccountPage() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/update-email", {
+      const res = await fetch("http://localhost:5030/api/update-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -111,7 +111,7 @@ function loadAccountPage() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/update-username", {
+      const res = await fetch("http://localhost:5030/api/update-username", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -135,7 +135,7 @@ function loadAccountPage() {
 
   logoutButton.addEventListener("click", async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/auth/logout", {
+      const res = await fetch("http://localhost:5030/api/auth/logout", {
         method: "GET",
         credentials: "include",
       });

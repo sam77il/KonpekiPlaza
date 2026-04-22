@@ -3,6 +3,7 @@ import db from "../utils/db.js";
 
 const router = express.Router();
 
+// Get user inventory
 router.get("/api/inventory", (req, res) => {
   if (!req.session.user) {
     res.status(401).json({ success: false, message: "Not logged in." });
@@ -12,7 +13,7 @@ router.get("/api/inventory", (req, res) => {
   try {
     const userId = req.session.user.id;
     db.query(
-      "SELECT user_items.amount, users.id AS user_id, users.username, users.email, items.id AS item_id, items.label, items.img FROM user_items JOIN users ON user_items.user_id = users.id JOIN items ON user_items.item_id = items.id WHERE user_items.user_id = ?",
+      "SELECT user_items.amount, user_items.id, users.id AS user_id, users.username, users.email, items.id AS item_id, items.label, items.img FROM user_items JOIN users ON user_items.user_id = users.id JOIN items ON user_items.item_id = items.id WHERE user_items.user_id = ?",
       [userId],
       (err, results) => {
         if (err) {

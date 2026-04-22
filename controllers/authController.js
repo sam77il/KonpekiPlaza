@@ -5,6 +5,7 @@ import db from "../utils/db.js";
 
 const router = express.Router();
 
+// Helper function to check if username or email already exists
 function checkIfUserExists(username, email) {
   return new Promise((resolve, reject) => {
     db.query(
@@ -21,6 +22,7 @@ function checkIfUserExists(username, email) {
   });
 }
 
+// Login route
 router.post("/api/auth/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -62,6 +64,7 @@ router.post("/api/auth/login", (req, res) => {
   );
 });
 
+// Registration route
 router.post("/api/auth/register", async (req, res) => {
   const { username, email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -92,6 +95,7 @@ router.post("/api/auth/register", async (req, res) => {
   );
 });
 
+// Logout route
 router.get("/api/auth/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -103,6 +107,7 @@ router.get("/api/auth/logout", (req, res) => {
   });
 });
 
+// Update username route
 router.post("/api/update-username", async (req, res) => {
   if (!req.session.user) {
     res.status(401).json({ success: false, message: "Unauthorized" });
@@ -135,6 +140,7 @@ router.post("/api/update-username", async (req, res) => {
   );
 });
 
+// Update email route
 router.post("/api/update-email", async (req, res) => {
   if (!req.session.user) {
     res.status(401).json({ success: false, message: "Unauthorized" });
@@ -165,6 +171,7 @@ router.post("/api/update-email", async (req, res) => {
   );
 });
 
+// Update password route
 router.post("/api/update-password", async (req, res) => {
   if (!req.session.user) {
     res.status(401).json({ success: false, message: "Unauthorized" });
@@ -235,6 +242,7 @@ router.post("/api/update-password", async (req, res) => {
   );
 });
 
+// Ping route to check if user is logged in and get user current data
 router.get("/api/auth/ping", (req, res) => {
   if (req.session.user) {
     res.json({ loggedIn: true, user: req.session.user });

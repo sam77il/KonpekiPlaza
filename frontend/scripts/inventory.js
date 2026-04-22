@@ -2,7 +2,7 @@ const userItemList = document.querySelector(".inventory-item-list");
 
 async function loadInventoryPage() {
   try {
-    const res = await fetch(`http://localhost:3000/api/inventory`, {
+    const res = await fetch(`http://localhost:5030/api/inventory`, {
       method: "GET",
       credentials: "include",
     });
